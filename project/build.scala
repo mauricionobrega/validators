@@ -7,6 +7,8 @@ import AssemblyKeys._
  * build configuration for Validators
  */
 object ValidatorsBuild extends Build {
+
+  val jettyVersion = "8.1.7.v20120910"
   
   lazy val validators = Project(
     id = "validator",
@@ -17,7 +19,7 @@ object ValidatorsBuild extends Build {
       version := "1.0-SNAPSHOT",
       scalaVersion := "2.9.2",
       javacOptions ++= Seq("-Xlint:unchecked", "-Xmx256m", "-XX:ThreadStackSize=2048"),
-      mainClass in assembly := Some("org.w3.validator.ServerMain"),
+      mainClass in assembly := Some("org.w3.validator.Validators"),
       jarName in assembly := "validators.jar",
 
       mergeStrategy in assembly <<= (mergeStrategy in assembly) {
@@ -25,6 +27,7 @@ object ValidatorsBuild extends Build {
         (old) =>
           {
             case "META-INF/MANIFEST.MF" => MergeStrategy.rename
+            case r if r.endsWith("about.html") => MergeStrategy.discard
             case r if r.startsWith("org" + fs + "jaxen" + fs + "expr" + fs + "DefaultVariableReferenceExpr.class") => MergeStrategy.concat
             case r if r.startsWith("org" + fs + "jaxen" + fs + "expr" + fs + "PredicateSet.class") => MergeStrategy.concat
             case r if r.startsWith("org" + fs + "jaxen" + fs + "util" + fs + "AncestorOrSelfAxisIterator.class") => MergeStrategy.concat
@@ -72,35 +75,42 @@ object ValidatorsBuild extends Build {
       resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots",
       resolvers += "apache-repo-releases" at "http://repository.apache.org/content/repositories/releases/",
 
-      libraryDependencies += "org.eclipse.jetty" % "jetty-webapp" % "8.1.7.v20120910" % "compile",
-      libraryDependencies += "org.eclipse.jetty" % "jetty-servlets" % "8.1.7.v20120910" % "compile",
-      libraryDependencies += "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "compile" artifacts (Artifact("javax.servlet", "jar", "jar")),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-webapp" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-util" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-server" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-io" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-http" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-security" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-continuation" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-xml" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-servlet" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty" % "jetty-servlets" % jettyVersion % "compile" intransitive(),
+      libraryDependencies += "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "compile" artifacts (Artifact("javax.servlet", "jar", "jar")) intransitive(),
       ivyXML := 
         <dependency org="org.eclipse.jetty.orbit" name="javax.servlet" rev="3.0.0.v201112011016">
           <artifact name="javax.servlet" type="orbit" ext="jar"/>
         </dependency>,
 
       libraryDependencies += "org.slf4j" % "slf4j-log4j12" % "1.6.4" % "compile",
-
-      libraryDependencies += "commons-codec" % "commons-codec" % "1.4"intransitive(),
-      libraryDependencies += "commons-httpclient" % "commons-httpclient" % "3.1"intransitive(),
-      libraryDependencies += "commons-logging" % "commons-logging" % "1.1.1"intransitive(),
-      libraryDependencies += "commons-logging" % "commons-logging-adapters" % "1.1.1" from "http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.zip"intransitive(),
-      libraryDependencies += "commons-logging" % "commons-logging-api" % "1.1.1" from "http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.zip"intransitive(),
-      libraryDependencies += "com.hp.hpl.jena" % "iri" % "0.5"intransitive(),
-      libraryDependencies += "commons-fileupload" % "commons-fileupload" % "1.2.1"intransitive(),
-      libraryDependencies += "rhino" % "js" % "1.7R1"intransitive(),
-      libraryDependencies += "xerces" % "xercesImpl" % "2.9.1"intransitive(),
-      libraryDependencies += "net.sourceforge.jchardet" % "jchardet" % "1.0"intransitive(),
-      libraryDependencies += "net.sourceforge.saxon" % "saxon" % "9.1.0.2" from "http://switch.dl.sourceforge.net/sourceforge/saxon/saxonb9-1-0-2j.zip"intransitive(),
-      libraryDependencies += "junit" % "junit" % "4.4"intransitive(),
+      libraryDependencies += "commons-codec" % "commons-codec" % "1.4" intransitive(),
+      libraryDependencies += "commons-httpclient" % "commons-httpclient" % "3.1" intransitive(),
+      libraryDependencies += "commons-logging" % "commons-logging" % "1.1.1" intransitive(),
+      libraryDependencies += "commons-logging" % "commons-logging-adapters" % "1.1.1" from "http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.zip" intransitive(),
+      libraryDependencies += "commons-logging" % "commons-logging-api" % "1.1.1" from "http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.zip" intransitive(),
+      libraryDependencies += "com.hp.hpl.jena" % "iri" % "0.5" intransitive(),
+      libraryDependencies += "commons-fileupload" % "commons-fileupload" % "1.2.1" intransitive(),
+      libraryDependencies += "rhino" % "js" % "1.7R1" intransitive(),
+      libraryDependencies += "xerces" % "xercesImpl" % "2.9.1" intransitive(),
+      libraryDependencies += "net.sourceforge.jchardet" % "jchardet" % "1.0" intransitive(),
+      libraryDependencies += "net.sourceforge.saxon" % "saxon" % "9.1.0.2" from "http://switch.dl.sourceforge.net/sourceforge/saxon/saxonb9-1-0-2j.zip" intransitive(),
+      libraryDependencies += "junit" % "junit" % "4.4" intransitive(),
       libraryDependencies += "xom" % "xom" % "1.1",
-      libraryDependencies += "com.sdicons.jsontools" % "jsontools-core" % "1.5"intransitive(),
-      libraryDependencies += "com.hp.hpl.jena" % "iri" % "0.5"intransitive(),
-      libraryDependencies += "com.ibm.icu" % "icu4j" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-4_4_2.jar"intransitive(),
-      libraryDependencies += "com.ibm.icu" % "icu4j-charsets" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-charsets-4_4_2.jar"intransitive(),
-      libraryDependencies += "antlr" % "antlr" % "validator.nu" from "http://hsivonen.iki.fi/code/antlr.jar"intransitive(),
-      libraryDependencies += "isorelax" % "isorelax" % "20041111" from "http://switch.dl.sourceforge.net/sourceforge/iso-relax/isorelax.20041111.zip"intransitive()))
+      libraryDependencies += "com.sdicons.jsontools" % "jsontools-core" % "1.5" intransitive(),
+      libraryDependencies += "com.hp.hpl.jena" % "iri" % "0.5" intransitive(),
+      libraryDependencies += "com.ibm.icu" % "icu4j" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-4_4_2.jar" intransitive(),
+      libraryDependencies += "com.ibm.icu" % "icu4j-charsets" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-charsets-4_4_2.jar" intransitive(),
+      libraryDependencies += "antlr" % "antlr" % "validator.nu" from "http://hsivonen.iki.fi/code/antlr.jar" intransitive(),
+      libraryDependencies += "isorelax" % "isorelax" % "20041111" from "http://switch.dl.sourceforge.net/sourceforge/iso-relax/isorelax.20041111.zip" intransitive()))
 
 }
 

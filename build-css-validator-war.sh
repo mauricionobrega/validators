@@ -6,8 +6,6 @@ date="2012-09-20"
 ## this script probably runs only on a Linux-based machine
 ## you need CVS, Java and ant to be already installed
 
-rm -Rf 2002 src/main/resource/css-validator*.war
-
 # check out the source
 export CVSROOT=":pserver:anonymous@dev.w3.org:/sources/public"
 echo

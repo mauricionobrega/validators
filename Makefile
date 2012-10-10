@@ -1,24 +1,26 @@
-PROGRAM			=	validator-nu-standalone
+PROGRAM = validator-nu-standalone
 
-all:			$(PROGRAM)
+all: $(PROGRAM)
 
-$(PROGRAM):		validator
-				
-validator:		
-				-mkdir lib
-				make -C checker all
-				./sbt compile
-					
-clean:			
-				make -C checker clean
-				-rm -rf lib/*.jar
-				
-dist-clean:		clean
-				make -C checker dist-clean
-				-rm -rf lib
-				
-run:			validator
-				./sbt run
-				
-jar:			validator
-				./sbt assembly
+$(PROGRAM): jar
+
+clean-validator.nu:
+	make -C checker clean
+	-rm -rf lib/*.jar
+
+clean-cssvalidator:
+	rm -Rf 2002 src/main/resource/css-validator*.war
+
+clean: clean-validator.nu clean-cssvalidator
+	make -C checker dist-clean
+	-rm -rf lib
+
+validator.nu:
+	-mkdir lib
+	make -C checker all
+
+css-validator:
+	./build-css-validator-war.sh
+
+jar: validator.nu css-validator
+	./sbt assembly

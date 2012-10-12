@@ -18,7 +18,7 @@ object ValidatorsBuild extends Build {
       organization := "org.w3",
       version := "1.0-SNAPSHOT",
       scalaVersion := "2.9.2",
-      javacOptions ++= Seq("-Xlint:unchecked", "-Xmx256m", "-XX:ThreadStackSize=2048"),
+//      javacOptions ++= Seq("-Xlint:unchecked", "-Xmx256m", "-XX:ThreadStackSize=2048"),
       mainClass in assembly := Some("org.w3.validator.Validators"),
       jarName in assembly := "validators.jar",
 
@@ -91,6 +91,7 @@ object ValidatorsBuild extends Build {
           <artifact name="javax.servlet" type="orbit" ext="jar"/>
         </dependency>,
 
+      // validator.nu
       libraryDependencies += "org.slf4j" % "slf4j-log4j12" % "1.6.4" % "compile",
       libraryDependencies += "commons-codec" % "commons-codec" % "1.4" intransitive(),
       libraryDependencies += "commons-httpclient" % "commons-httpclient" % "3.1" intransitive(),
@@ -110,7 +111,17 @@ object ValidatorsBuild extends Build {
       libraryDependencies += "com.ibm.icu" % "icu4j" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-4_4_2.jar" intransitive(),
       libraryDependencies += "com.ibm.icu" % "icu4j-charsets" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-charsets-4_4_2.jar" intransitive(),
       libraryDependencies += "antlr" % "antlr" % "validator.nu" from "http://hsivonen.iki.fi/code/antlr.jar" intransitive(),
-      libraryDependencies += "isorelax" % "isorelax" % "20041111" from "http://switch.dl.sourceforge.net/sourceforge/iso-relax/isorelax.20041111.zip" intransitive()))
+
+
+      // css validator
+      libraryDependencies += "tagsoup" % "tagsoup" % "1.2" from "http://home.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2.jar",
+      libraryDependencies += "commons-collections" % "commons-collections" % "3.2.1",
+      libraryDependencies += "commons-lang" % "commons-lang" % "2.6",
+      libraryDependencies += "velocity" % "velocity" % "1.7" from "http://www.apache.org/dist/velocity/engine/1.7/velocity-1.7.jar"))
+
+
+
+
 
 }
 

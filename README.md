@@ -39,7 +39,7 @@ Using the jar you previously built:
 java -jar target/validators.jar 8888
 ```
 
-Then go to [http://localhost:8888](http://localhost:8888) or [http://localhost:8888/css/](http://localhost:8888/css).
+Then go to [http://localhost:8888/nu](http://localhost:8888/nu) or [http://localhost:8888/css/](http://localhost:8888/css).
 
 Licence
 -------

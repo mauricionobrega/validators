@@ -18,35 +18,10 @@ import java.nio.file._
 class CSSValidator(prefix: String = "/css") extends Validator {
 
   def handler: ServletContextHandler = {
-
-    // the path to the war file
-    // first, tries to see if this is running from sbt
-    // if it's not, we assume we are in the jar and that the war is available there
-    val warPath: String = {
-      val date = "2012-09-20"
-      val warName = "css-validator-" + date + ".war"
-      val sbtPath = "src/main/resources/" + warName
-      if (Paths.get(sbtPath).toFile.exists) {
-        sbtPath
-      } else {
-        val tmpPath = Paths.get(java.lang.System.getProperty("java.io.tmpdir")).resolve(warName)
-        // this extracts the war file and make it available in the tmp directory
-        if (! tmpPath.toFile.exists) {
-          val is: InputStream = getClass().getResourceAsStream("/" + warName)
-          Files.copy(is, tmpPath)
-        }
-        tmpPath.toString
-      }
-    }
-
-    val webapp = {
-      val webapp = new WebAppContext
-      webapp.setContextPath(prefix)
-      webapp.setWar(warPath)
-      webapp
-    }
-
-    webapp
-
+    val context = new ServletContextHandler
+    context.setContextPath(prefix)
+    context.setInitParameter("vendorExtensionsAsWarnings", "true")
+    context.addServlet(new ServletHolder(new org.w3c.css.servlet.CssValidator), "/*")
+    context
   }
 }

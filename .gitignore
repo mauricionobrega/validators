@@ -31,6 +31,7 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
+src/main/resources/org
 
 # Scala-IDE specific
 .scala_dependencieschecker/build

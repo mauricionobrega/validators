@@ -16,9 +16,14 @@ import java.util.EnumSet
  * Validator.nu wrapping class
  * @author Hirotaka Nakajima <hiro@w3.org>
  */
-class ValidatorNu(configuration: ValidatorNuConfiguration = ValidatorNuConfiguration.default) extends Validator {
+class ValidatorNu(prefix: String = "/nu") extends Validator {
+
+  val configuration: ValidatorNuConfiguration = ValidatorNuConfiguration.default
+  configuration.setSystemProperties()
+
   // TODO shouldn't this be either passed?
-  val SIZE_LIMIT: Long = Integer.parseInt(System.getProperty("nu.validator.servlet.max-file-size", "2097152"))
+  val SIZE_LIMIT: Long =
+    Integer.parseInt(System.getProperty("nu.validator.servlet.max-file-size", "2097152"))
 
   //  if (!"1".equals(System.getProperty("nu.validator.servlet.read-local-log4j-properties"))) {
   PropertyConfigurator.configure(classOf[nu.validator.servlet.Main].getClassLoader().getResource("nu/validator/localentities/files/log4j.properties"))
@@ -26,11 +31,9 @@ class ValidatorNu(configuration: ValidatorNuConfiguration = ValidatorNuConfigura
   //    PropertyConfigurator.configure(System.getProperty("nu.validator.servlet.log4j-properties", "log4j.properties"))
   //  }
 
-  configuration.setSystemProperties()
-
   def handler: ServletContextHandler = {
     val context = new ServletContextHandler
-    context.setContextPath("/")
+    context.setContextPath(prefix)
     val dispatches = EnumSet.of(DispatcherType.REQUEST)
     context.addFilter(new FilterHolder(new GzipFilter), "/*", dispatches)
     context.addFilter(new FilterHolder(new InboundSizeLimitFilter(SIZE_LIMIT)), "/*", dispatches)

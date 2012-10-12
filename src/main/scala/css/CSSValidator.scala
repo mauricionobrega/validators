@@ -17,6 +17,8 @@ import java.nio.file._
  */
 class CSSValidator(prefix: String = "/css") extends Validator {
 
+  org.w3c.css.util.Util.onDebug = false
+
   def handler: ServletContextHandler = {
     val context = new ServletContextHandler
     context.setContextPath(prefix)

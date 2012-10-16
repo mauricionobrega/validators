@@ -2,7 +2,6 @@ package org.w3.validator
 
 import _root_.nu.validator.servletfilter.{ InboundGzipFilter, InboundSizeLimitFilter }
 import _root_.nu.validator.servlet.{ MultipartFormDataFilter, VerifierServlet }
-import org.apache.log4j.PropertyConfigurator
 import org.eclipse.jetty.server.{ Server, Handler, Connector }
 import org.eclipse.jetty.server.nio.SelectChannelConnector
 import org.eclipse.jetty.server.handler.ContextHandlerCollection

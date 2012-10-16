@@ -92,7 +92,8 @@ object ValidatorsBuild extends Build {
         </dependency>,
 
       // validator.nu
-      libraryDependencies += "org.slf4j" % "slf4j-log4j12" % "1.6.4" % "compile",
+      libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.7",
+      libraryDependencies += "log4j" % "log4j" % "1.2.16" % "compile",
       libraryDependencies += "commons-httpclient" % "commons-httpclient" % "3.1" intransitive(),
       libraryDependencies += "commons-logging" % "commons-logging" % "1.1.1" intransitive(),
       libraryDependencies += "com.hp.hpl.jena" % "iri" % "0.5" intransitive(),

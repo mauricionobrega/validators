@@ -14,7 +14,7 @@ dist-clean-cssvalidator: clean-cssvalidator
 dist-clean-validator.nu: clean-validator.nu
 
 clean-cssvalidator:
-	rm -Rf lib/css-validator.jar src/main/resources/org/w3c/css/index src/main/resources/org/w3c/css/css
+	rm -Rf src/main/resource/css-validator*.war lib/css-validator.jar src/main/resources/org src/main/resources/*.vm
 
 clean: clean-validator.nu clean-cssvalidator
 	make -C checker dist-clean

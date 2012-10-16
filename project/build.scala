@@ -101,13 +101,13 @@ object ValidatorsBuild extends Build {
       libraryDependencies += "com.ibm.icu" % "icu4j" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-4_4_2.jar" intransitive(),
       libraryDependencies += "com.ibm.icu" % "icu4j-charsets" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-charsets-4_4_2.jar" intransitive(),
       libraryDependencies += "commons-codec" % "commons-codec" % "1.4" intransitive(),
-      libraryDependencies += "xom" % "xom" % "1.1",
+      libraryDependencies += "xom" % "xom" % "1.1"))
 
-      // css validator
-      libraryDependencies += "tagsoup" % "tagsoup" % "1.2" from "http://home.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2.jar",
-      libraryDependencies += "commons-collections" % "commons-collections" % "3.2.1",
-      libraryDependencies += "commons-lang" % "commons-lang" % "2.6",
-      libraryDependencies += "velocity" % "velocity" % "1.7" from "http://www.apache.org/dist/velocity/engine/1.7/velocity-1.7.jar"))
+//      // css validator
+//      libraryDependencies += "tagsoup" % "tagsoup" % "1.2" from "http://home.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2.jar",
+//      libraryDependencies += "commons-collections" % "commons-collections" % "3.2.1",
+//      libraryDependencies += "commons-lang" % "commons-lang" % "2.6",
+//      libraryDependencies += "velocity" % "velocity" % "1.7" from "http://www.apache.org/dist/velocity/engine/1.7/velocity-1.7.jar"
 
 
 

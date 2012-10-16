@@ -28,6 +28,7 @@ object ValidatorsBuild extends Build {
           {
             case "META-INF/MANIFEST.MF" => MergeStrategy.rename
             case r if r.endsWith("about.html") => MergeStrategy.discard
+            case r if r.endsWith("logback.xml") => MergeStrategy.discard
             case r if r.startsWith("org" + fs + "jaxen" + fs + "expr" + fs + "DefaultVariableReferenceExpr.class") => MergeStrategy.concat
             case r if r.startsWith("org" + fs + "jaxen" + fs + "expr" + fs + "PredicateSet.class") => MergeStrategy.concat
             case r if r.startsWith("org" + fs + "jaxen" + fs + "util" + fs + "AncestorOrSelfAxisIterator.class") => MergeStrategy.concat
@@ -92,7 +93,7 @@ object ValidatorsBuild extends Build {
         </dependency>,
 
       // validator.nu
-      libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.7",
+      libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.7" % "provided",
       libraryDependencies += "log4j" % "log4j" % "1.2.16" % "compile",
       libraryDependencies += "commons-httpclient" % "commons-httpclient" % "3.1" intransitive(),
       libraryDependencies += "commons-logging" % "commons-logging" % "1.1.1" intransitive(),

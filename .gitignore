@@ -48,3 +48,4 @@ checker/jars
 checker/local-entities
 lib
 sbt-launch-*.jar
+*.vm

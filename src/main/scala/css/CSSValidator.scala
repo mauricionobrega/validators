@@ -17,7 +17,12 @@ import java.nio.file._
  */
 class CSSValidator(prefix: String = "/css") extends Validator {
 
+  // there is a little bit of annoying ceremony to get around how the
+  // css validator loads its resources
+  import org.apache.velocity.app.Velocity
   org.w3c.css.util.Util.onDebug = false
+  Velocity.setProperty("resource.loader", "class")
+  Velocity.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader")
 
   def handler: ServletContextHandler = {
     val context = new ServletContextHandler

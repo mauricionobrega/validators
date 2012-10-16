@@ -93,25 +93,15 @@ object ValidatorsBuild extends Build {
 
       // validator.nu
       libraryDependencies += "org.slf4j" % "slf4j-log4j12" % "1.6.4" % "compile",
-      libraryDependencies += "commons-codec" % "commons-codec" % "1.4" intransitive(),
       libraryDependencies += "commons-httpclient" % "commons-httpclient" % "3.1" intransitive(),
       libraryDependencies += "commons-logging" % "commons-logging" % "1.1.1" intransitive(),
-      libraryDependencies += "commons-logging" % "commons-logging-adapters" % "1.1.1" from "http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.zip" intransitive(),
-      libraryDependencies += "commons-logging" % "commons-logging-api" % "1.1.1" from "http://archive.apache.org/dist/commons/logging/binaries/commons-logging-1.1.1-bin.zip" intransitive(),
       libraryDependencies += "com.hp.hpl.jena" % "iri" % "0.5" intransitive(),
       libraryDependencies += "commons-fileupload" % "commons-fileupload" % "1.2.1" intransitive(),
       libraryDependencies += "rhino" % "js" % "1.7R1" intransitive(),
-      libraryDependencies += "xerces" % "xercesImpl" % "2.9.1" intransitive(),
-      libraryDependencies += "net.sourceforge.jchardet" % "jchardet" % "1.0" intransitive(),
-      libraryDependencies += "net.sourceforge.saxon" % "saxon" % "9.1.0.2" from "http://switch.dl.sourceforge.net/sourceforge/saxon/saxonb9-1-0-2j.zip" intransitive(),
-      libraryDependencies += "junit" % "junit" % "4.4" intransitive(),
-      libraryDependencies += "xom" % "xom" % "1.1",
-      libraryDependencies += "com.sdicons.jsontools" % "jsontools-core" % "1.5" intransitive(),
-      libraryDependencies += "com.hp.hpl.jena" % "iri" % "0.5" intransitive(),
       libraryDependencies += "com.ibm.icu" % "icu4j" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-4_4_2.jar" intransitive(),
       libraryDependencies += "com.ibm.icu" % "icu4j-charsets" % "4.4.2" from "http://download.icu-project.org/files/icu4j/4.4.2/icu4j-charsets-4_4_2.jar" intransitive(),
-      libraryDependencies += "antlr" % "antlr" % "validator.nu" from "http://hsivonen.iki.fi/code/antlr.jar" intransitive(),
-
+      libraryDependencies += "commons-codec" % "commons-codec" % "1.4" intransitive(),
+      libraryDependencies += "xom" % "xom" % "1.1",
 
       // css validator
       libraryDependencies += "tagsoup" % "tagsoup" % "1.2" from "http://home.ccil.org/~cowan/XML/tagsoup/tagsoup-1.2.jar",

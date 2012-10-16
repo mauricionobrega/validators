@@ -17,7 +17,7 @@ object ValidatorsBuild extends Build {
     settings = Defaults.defaultSettings ++ assemblySettings ++ Seq(
       organization := "org.w3",
       version := "1.0-SNAPSHOT",
-      scalaVersion := "2.9.2",
+      scalaVersion := "2.10.0-M7",
 //      javacOptions ++= Seq("-Xlint:unchecked", "-Xmx256m", "-XX:ThreadStackSize=2048"),
       mainClass in assembly := Some("org.w3.validator.Validators"),
       jarName in assembly := "validators.jar",

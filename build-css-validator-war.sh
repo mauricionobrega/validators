@@ -19,22 +19,12 @@ fi;
 # build the jar file
 cd 2002/css-validator
 ant
-ant war
+ant jar
 
 # stages the jar and templates so that it's part of the SBT project
 cd ../..
-echo copying the war
-cp 2002/css-validator/css-validator.war src/main/resources/css-validator-$date.war
-
-## # build the jar file
-## cd 2002/css-validator
-## ant
-## ant jar
-## 
-## # stages the jar and templates so that it's part of the SBT project
-## cd ../..
-## echo copying the jar and other files
-## cp 2002/css-validator/css-validator.jar lib
-## mkdir -p src/main/resources/org/w3c/css/index src/main/resources/org/w3c/css/css
-## cp 2002/css-validator/*html* src/main/resources/org/w3c/css/index
-## cp 2002/css-validator/org/w3c/css/index/validator.vm src/main/resources
+echo copying the jar and other files
+cp 2002/css-validator/css-validator.jar lib
+mkdir -p src/main/resources/org/w3c/css/index src/main/resources/org/w3c/css/css
+cp 2002/css-validator/*html* src/main/resources/org/w3c/css/index
+cp 2002/css-validator/org/w3c/css/index/validator.vm src/main/resources

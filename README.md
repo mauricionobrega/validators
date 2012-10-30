@@ -8,7 +8,7 @@ With this, you can build, assemble and run the service locally within minutes.
 How to build the validators
 ---------------------------
 
-You need Python, Java, Mercurial, SVN and ant.
+You need Python, Java >1.7, Mercurial, SVN and ant.
 
 ```bash
 JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 make jar

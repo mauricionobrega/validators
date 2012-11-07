@@ -14,6 +14,13 @@ You need Python, Java >1.7, Mercurial, SVN and ant.
 JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64 make jar
 ```
 
+For OSX, please make sure you have JDK 1.7.
+
+```bash
+JAVA_HOME=$(/usr/libexec/java_home) make jar
+```
+
+
 You need to make sure that `JAVA_HOME` points to your local Java
 home. It may even be already set.
 

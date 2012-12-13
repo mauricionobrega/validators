@@ -27,4 +27,4 @@ echo copying the jar and other files
 cp 2002/css-validator/css-validator.jar lib
 mkdir -p src/main/resources/org/w3c/css/index src/main/resources/org/w3c/css/css
 cp 2002/css-validator/*html* src/main/resources/org/w3c/css/index
-cp 2002/css-validator/org/w3c/css/index/validator.vm src/main/resources
+cp 2002/css-validator/org/w3c/css/index/*.vm src/main/resources
